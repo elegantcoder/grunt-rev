@@ -50,5 +50,18 @@ exports.rev = {
     test.ok(exists, '8 character MD5 hash prefix for international content');
 
     test.done();
+  },
+
+  output_options: function (test) {
+    test.expect(2);
+
+    var jsonPath = 'tmp/rev-output.json';
+    var exists = grunt.file.exists(jsonPath);
+    test.ok(exists, 'Output JSON exists');
+    var json = JSON.parse(grunt.file.read(jsonPath));
+
+    test.deepEqual(json, {rev:[{original: 'tmp/output.txt', renamed: 'tmp/9e107d9d.output.txt'}]})
+
+    test.done();
   }
 };

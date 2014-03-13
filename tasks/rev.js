@@ -29,6 +29,8 @@ module.exports = function(grunt) {
       length: 8
     });
 
+    var output = {rev: []};
+
     this.files.forEach(function(filePair) {
       filePair.src.forEach(function(f) {
 
@@ -41,9 +43,18 @@ module.exports = function(grunt) {
         fs.renameSync(f, outPath);
         grunt.log.write(f + ' ').ok(renamed);
 
+        if (options.output) {
+          output.rev.push({
+            original: f,
+            renamed: f.replace(path.basename(f), '') + renamed
+          });
+        }
       });
     });
 
+    if (options.output) {
+      grunt.file.write(options.output, JSON.stringify(output, null, 4), {encoding: 'utf-8'});
+    }
   });
 
 };

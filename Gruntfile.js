@@ -56,6 +56,12 @@ module.exports = function(grunt) {
         },
         src: ['tmp/international.txt']
       },
+      output_options: {
+        src: ['tmp/output.txt'],
+        options: {
+          output: 'tmp/rev-output.json'
+        }
+      }
     },
 
     // Unit tests.
